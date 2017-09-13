@@ -11,7 +11,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^', include(router.urls), name='home'),
     url(r'^explorer/$', schema_view),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
