@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 from django.views import defaults as default_views
+from django.core.urlresolvers import reverse_lazy
 from rest_framework_swagger.views import get_swagger_view
 from .router import router
 
@@ -12,8 +13,8 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     # API views
-    url(r'^', RedirectView.as_view(url='/api', permanent=False), name='home'),
-    url(r'^api/', include(router.urls, namespace='api')),
+    url(r'^', RedirectView.as_view(url=reverse_lazy('api'), permanent=False), name='home'),
+    url(r'^api/', include(router.urls, namespace='api'), name='api'),
     url(r'^explorer/$', schema_view, name='swagger'),
 
     # Django Admin, use {% url 'admin:index' %}
