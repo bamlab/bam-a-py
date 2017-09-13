@@ -4,9 +4,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from rest_framework_swagger.views import get_swagger_view
+from .router import router
+
+schema_view = get_swagger_view(title='Pastebin API')
+
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    url(r'^', include(router.urls)),
+    url(r'^explorer/$', schema_view),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
 
     # Django Admin, use {% url 'admin:index' %}
@@ -17,6 +23,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
