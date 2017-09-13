@@ -14,7 +14,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 urlpatterns = [
     # API views
     url(r'^', include(router.urls, namespace='api'), name='home'),
-    url(r'^explorer/$', schema_view, name='swagger'),
+    url(r'^explorer/$', schema_view),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls, name='admin'),
