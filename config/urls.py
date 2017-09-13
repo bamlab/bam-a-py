@@ -13,8 +13,7 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
     # API views
-    url(r'^', RedirectView.as_view(url=reverse_lazy('api'), permanent=False), name='home'),
-    url(r'^api/', include(router.urls, namespace='api'), name='api'),
+    url(r'^', include(router.urls, namespace='api'), name='home'),
     url(r'^explorer/$', schema_view, name='swagger'),
 
     # Django Admin, use {% url 'admin:index' %}
