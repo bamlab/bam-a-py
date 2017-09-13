@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
 from django.views import defaults as default_views
 from rest_framework_swagger.views import get_swagger_view
 from .router import router
@@ -11,16 +11,17 @@ schema_view = get_swagger_view(title='Pastebin API')
 
 
 urlpatterns = [
-    url(r'^', include(router.urls), name='home'),
-    url(r'^explorer/$', schema_view),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    # API views
+    url(r'^', RedirectView.as_view(url='/api', permanent=False), name='home'),
+    url(r'^api/', include(router.urls, namespace='api')),
+    url(r'^explorer/$', schema_view, name='swagger'),
 
     # Django Admin, use {% url 'admin:index' %}
-    url(settings.ADMIN_URL, admin.site.urls),
+    url(settings.ADMIN_URL, admin.site.urls, name='admin'),
 
     # User management
     url(r'^users/', include('bam_a_py.users.urls', namespace='users')),
-    url(r'^accounts/', include('allauth.urls')),
+    # url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
