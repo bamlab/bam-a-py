@@ -1,5 +1,6 @@
 
 import os
+import time
 from celery import Celery
 from django.apps import apps, AppConfig
 from django.conf import settings
@@ -36,7 +37,12 @@ class CeleryConfig(AppConfig):
             raven_register_logger_signal(raven_client)
             raven_register_signal(raven_client)
 
-        
+
+
+@app.task
+def add(x, y):
+    time.sleep(2)
+    return x + y
 
 
 @app.task(bind=True)
