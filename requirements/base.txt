@@ -47,3 +47,6 @@ celery==3.1.25
 
 djangorestframework==3.6.4
 django-rest-swagger==2.1.2
+
+graphene-django==2.0.dev2017083101
+django-filter==1.0.4

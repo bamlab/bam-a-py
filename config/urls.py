@@ -2,18 +2,18 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic.base import RedirectView
 from django.views import defaults as default_views
-from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
 from rest_framework_swagger.views import get_swagger_view
 from .router import router
+from graphene_django.views import GraphQLView
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 
 urlpatterns = [
     # API views
-    url(r'^', include(router.urls, namespace='api'), name='home'),
+    url(r'^api/', include(router.urls, namespace='api'), name='api'),
     url(r'^explorer/$', schema_view),
 
     # Django Admin, use {% url 'admin:index' %}
@@ -24,8 +24,9 @@ urlpatterns = [
     # url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    url(r'^graphql/', GraphQLView.as_view(graphiql=True)),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -43,3 +44,5 @@ if settings.DEBUG:
         urlpatterns = [
             url(r'^__debug__/', include(debug_toolbar.urls)),
         ] + urlpatterns
+
+urlpatterns.append(url(r'^.*$', RedirectView.as_view(url="/api/", permanent=False)))
