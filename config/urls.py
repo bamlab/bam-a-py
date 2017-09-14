@@ -7,6 +7,7 @@ from django.views.generic import RedirectView
 from rest_framework_swagger.views import get_swagger_view
 from .router import router
 from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
 
 schema_view = get_swagger_view(title='Pastebin API')
 
@@ -26,7 +27,7 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    url(r'^graphql/', GraphQLView.as_view(graphiql=True)),
+    url(r'^graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
