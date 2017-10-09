@@ -9,8 +9,8 @@ from bam_a_py.users.models import User
 class UserNode(DjangoObjectType):
     class Meta:
         model = User
-        only_fields = ('username', 'name', 'email', 'id')
-        filter_fields = ['name',]
+        only_fields = ('id', 'username', 'email', 'first_name', 'job_function', 'last_name', 'coach')
+        filter_fields = ['username']
         interfaces = (relay.Node, )
 
     @classmethod
