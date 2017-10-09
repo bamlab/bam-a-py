@@ -21,6 +21,13 @@ Moved to settings_.
 Basic Commands
 --------------
 
+Install
+^^^^^^^
+
+* Run `docker-compose -f local.yml build`
+* Run `docker-compose -f local.yml up`
+* Run `docker-compose -f local.yml run django python manage.py migrate`
+
 Setting Up Your Users
 ^^^^^^^^^^^^^^^^^^^^^
 
