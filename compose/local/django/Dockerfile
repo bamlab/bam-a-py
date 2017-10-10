@@ -22,6 +22,10 @@ COPY ./compose/local/django/celery/beat/start.sh /start-celerybeat.sh
 RUN sed -i 's/\r//' /start-celerybeat.sh
 RUN chmod +x /start-celerybeat.sh
 
+COPY ./compose/local/django/celery/camera/start.sh /start-celerycamera.sh
+RUN sed -i 's/\r//' /start-celerycamera.sh
+RUN chmod +x /start-celerycamera.sh
+
 WORKDIR /app
 
 ENTRYPOINT ["/entrypoint.sh"]

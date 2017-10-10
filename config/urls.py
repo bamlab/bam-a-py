@@ -9,7 +9,7 @@ from .router import router
 from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
 
-schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_swagger_view(title='BAM A.py')
 
 
 urlpatterns = [

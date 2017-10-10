@@ -52,3 +52,12 @@ services:
     ports: []
     command: /start-celerybeat.sh
 
+  celerycamera:
+    # https://github.com/docker/compose/issues/3220
+    <<: *django
+    depends_on:
+      - redis
+      - postgres
+    ports: []
+    command: /start-camera.sh
+
