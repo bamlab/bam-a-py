@@ -59,6 +59,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'bam_a_py.users.apps.UsersConfig',
+    'bam_a_py.competencies_matrix.apps.CompetenciesMatrixConfig'
     # Your stuff: custom apps go here
 ]
 

@@ -1,6 +1,7 @@
-from .models import User, JobFunction
 from rest_framework import serializers
-from .fields import EnumField
+
+from bam_a_py.contrib.fields import EnumField
+from .models import User, JobFunction
 
 
 # Serializers define the API representation.
